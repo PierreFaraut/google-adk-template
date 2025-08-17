@@ -8,7 +8,7 @@ load_dotenv()
 
 # Configuration
 AGENT_DIR = os.path.dirname(os.path.abspath(__file__))
-SESSION_DB_URL = "sqlite:///./habit```ta.db"
+SESSION_DB_URL = "sqlite:///./sessions.db"
 ALLOWED_ORIGINS = ["*"]  # À restreindre en production
 
 # ✨ Magie ADK : Création automatique de l'app FastAPI
