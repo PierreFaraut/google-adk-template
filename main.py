@@ -8,15 +8,19 @@ load_dotenv()
 
 # Configuration
 AGENT_DIR = os.path.dirname(os.path.abspath(__file__))
-SESSION_DB_URL = "sqlite:///./sessions.db"
-ALLOWED_ORIGINS = ["*"]  # À restreindre en production
 
-# ✨ Magie ADK : Création automatique de l'app FastAPI
+if os.environ.get("ENV_MODE", 'dev').lower() == "prod":
+    SESSION_DB_URL = os.environ.get("SESSION_DB_URL")
+else:
+    ## sqlite db for local development
+    SESSION_DB_URL = os.environ.get("sqlite:///./sessions.db")
+ALLOWED_ORIGINS = ["*"] 
+
 app: FastAPI = get_fast_api_app(
-    agents_dir=AGENT_DIR,           # Répertoire contenant vos agents
-    session_service_uri=SESSION_DB_URL,  # Votre DB de sessions
+    agents_dir=AGENT_DIR,       
+    session_service_uri=SESSION_DB_URL, 
     allow_origins=ALLOWED_ORIGINS,
-    web=True,                       # Active l'interface Web ADK
+    web=True,                    
 )
 
 # Personnalisation de l'API
