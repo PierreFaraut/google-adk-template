@@ -1,10 +1,16 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 import os
 import uvicorn
 from fastapi import FastAPI
 from google.adk.cli.fast_api import get_fast_api_app
-from dotenv import load_dotenv
+import agentops
 
-load_dotenv()
+AGENTOPS_API_KEY = os.getenv("AGENTOPS_API_KEY")
+agentops.init(api_key=AGENTOPS_API_KEY, default_tags=["google adk"])
+
 
 # Configuration
 AGENT_DIR = os.path.dirname(os.path.abspath(__file__))
